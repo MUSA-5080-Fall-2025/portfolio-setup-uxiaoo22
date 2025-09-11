@@ -14,6 +14,9 @@ website:
             text: "All Notes"
           - href: weekly-notes/week-01-notes.qmd
             text: "Week 1 Notes"
+          - href: weekly-notes/week-02-notes.qmd
+            text: "Week 2 Notes"
+            
 
 format:
   html:
