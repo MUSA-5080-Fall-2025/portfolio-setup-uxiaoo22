@@ -16,6 +16,11 @@ website:
             text: "Week 1 Notes"
           - href: weekly-notes/week-02-notes.qmd
             text: "Week 2 Notes"
+      - text: "Labs"
+        menu:
+          - href: labs/lab_0/script
+            text: "Lab 0: dplyr Basics"
+      
             
 format:
   html:
