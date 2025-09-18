@@ -17,7 +17,6 @@ website:
           - href: weekly-notes/week-02-notes.qmd
             text: "Week 2 Notes"
             
-
 format:
   html:
     theme: cosmo
