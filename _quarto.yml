@@ -22,7 +22,7 @@ website:
             text: "Lab 0: dplyr Basics"
       - text: "Assignments"
         menu:
-          - href: /Users/cathy/GitHub/portfolio-setup-uxiaoo22/Assigments 
+          - href: Assignments/Assignment_1.qmd
             text: "Assignment 1"
             
 format:
