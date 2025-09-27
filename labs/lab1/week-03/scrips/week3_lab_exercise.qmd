@@ -25,7 +25,7 @@ library(tidycensus)
 library(scales)
 library(RColorBrewer)
 # Set your Census API key if you haven't already
-census_api_key(Sys.getenv("ec702835845a134b4376c60759aa72ce62f6df59."))
+census_api_key("ec702835845a134b4376c60759aa72ce62f6df59")
 
 # We'll use Pennsylvania data for consistency with previous weeks
 state_choice <- "PA"
@@ -148,7 +148,7 @@ head(education_vars, 5)
 ```{r}
 # Open the full variable list in RStudio viewer
 # This opens a searchable data table
-View(acs_vars_2022)
+if (interactive()) View(acs_vars_2022)
 
 # Pro tip: You can also search specific table groups
 # B01 = Age and Sex
@@ -241,7 +241,7 @@ county_data <- get_acs(
 
 # Clean county names
 county_data <- county_data %>%
-  mutate(county_name = str_remove(NAME, paste0(", ", state_choice)))
+  mutate(county_name = str_remove(NAME, paste0(", Pennsylvania")))
 
 # Basic inspection
 glimpse(county_data)
@@ -256,7 +256,7 @@ describe what you see.
 # Create histogram of median income
 ggplot(county_data) +
   aes(x = median_incomeE) +
-  geom_histogram(bins = 15, fill = "lightpink", alpha = 0.7) +
+  geom_histogram(bins = 15, fill = "lightpink", alpha = 0.5) +
   labs(
     title = "Distribution of Median Household Income",
     x = "Median Household Income ($)",
@@ -316,12 +316,12 @@ ggplot(county_data) +
   aes(x = total_popE) +
   geom_histogram(bins = 15, fill = "lightpink", alpha = 0.7) +
   labs(
-    title = "Total Population",
+    title = "Total Population Distribution",
     x = "Population",
     y = "Number of Counties"
   ) +
   theme_minimal() +
-  scale_x_continuous(labels)
+  scale_x_continuous(labels=comma)
 ```
 ```{r}
 # Box plot to see outliers clearly
@@ -329,14 +329,14 @@ ggplot(county_data) +
   aes(y = total_popE) +
   geom_boxplot(fill = "lightpink", width = 0.5) +
   labs(
-    title = "Median population with Outliers",
-    y = "population"
+    title = "Total population distribution with Outliers",
+    y = "Population"
   ) +
   theme_minimal() +
-  scale_y_continuous(labels)
+  scale_y_continuous(labels=comma)
 
 # Identify the outlier counties
-income_outliers <- county_data %>%
+population_outliers <- county_data %>%
   mutate(
     Q1 = quantile(total_popE, 0.25, na.rm = TRUE),
     Q3 = quantile(total_popE, 0.75, na.rm = TRUE),
@@ -347,7 +347,7 @@ income_outliers <- county_data %>%
   select(county_name, total_popE)
 
 print("Outlier counties:")
-
+population_outliers
 ```
 
 ------------------------------------------------------------------------
@@ -384,7 +384,7 @@ interesting points.
 ggplot(county_data) +
   aes(x = total_popE, y = median_incomeE) +
   geom_point(alpha = 0.7) +
-  geom_smooth(method = "lm", se = TRUE, color = "red") +
+  geom_smooth(method = "lm", se = TRUE, color = "lightpink") +
   labs(
     title = "Population vs Median Income in Pennsylvania Counties",
     subtitle = "2018-2022 ACS 5-Year Estimates",
@@ -422,6 +422,7 @@ ggplot(county_data) +
 ```
 
 **Question:** Does the log transformation reveal a clearer relationship?
+Yes. It's a positive slope, it suggests that more populous counties tend to have higher median household incomes.
 
 ### 2.4 Challenge Exercise: Age vs Income Relationship
 
@@ -447,7 +448,7 @@ ggplot(county_data) +
   labs(
     title = "Median Age vs Median Income in Pennsylvania Counties",
     subtitle = "2018-2022 ACS 5-Year Estimates",
-    x = "Total Population",
+    x = "Median Age",
     y = "Median Household Income ($)",
     caption = "Source: U.S. Census Bureau"
   ) +
@@ -536,28 +537,41 @@ using `geom_hline()` with a blue dashed line
 # Calculate MOE percentages
 county_reliability <- county_data %>%
   mutate(
-    income_moe_pct = (median_ageM / median_ageE) * 100,
+    age_moe_pct = (median_ageM / median_ageE) * 100,
     pop_category = case_when(
       median_ageE < 40 ~ "Small (<40)",
-      median_ageE < 50 ~ "Medium (50)",
-      TRUE ~ "Large (200K+)"
+      median_ageE < 50 ~ "Medium (40-50)",
+      TRUE ~ "Large (>50)"
     )
   )
 
 # MOE by population size
 ggplot(county_reliability) +
-  aes(x = total_popE, y = income_moe_pct) +
-  geom_point(alpha = 0.7) +
-  geom_hline(yintercept = 10, color = "blue", linetype = "dashed",size = 2 ) +
+  aes(x = median_ageE, y = age_moe_pct) +
+  geom_point(alpha = 0.7, color = "purple",size = 2) +
+  geom_hline(yintercept = 5, color = "blue", linetype = "dashed",size = 0.5 ) +
   labs(
     title = "Data Reliability of median age data across
 counties.",
-    x = "Total Population",
+    x = "Median Age",
     y = "Margin of Error (%)",
     caption = "Red line = 5% reliability threshold"
   ) +
   theme_classic() +
   scale_x_continuous(labels = comma)
+```
+```{r}
+# Box plots by population category
+ggplot(county_reliability) +
+  aes(x = pop_category, y = age_moe_pct, fill = pop_category) +
+  geom_boxplot() +
+  labs(
+    title = "age MOE across the three population categories",
+    x = "Population Category",
+    y = "Margin of Error (%)"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")  # Remove legend since x-axis is clear
 ```
 
 ------------------------------------------------------------------------
@@ -618,6 +632,7 @@ ggplot(county_faceted) +
 
 **Question:** Do the relationships between population and income differ
 by age profile?
+Yes
 
 **Your Task:** Create a visualization using income categories and multiple aesthetic mappings.
 
@@ -630,6 +645,39 @@ by age profile?
 - Use the "Set2" color palette: `scale_color_brewer(palette = "Set2")` **note: you'll need to load the `RColorBrewer` package for this`
 - Facet by income category using `facet_wrap()` 
 - Use `theme_bw()` theme
+```{r}
+# Create income categories
+county_income_plot <- county_data %>%
+  mutate(
+    income_cat = case_when(
+      median_incomeE < 50000 ~ "Low (<$50K)",
+      median_incomeE < 80000 ~ "Middle ($50K–$80K)",
+      TRUE ~ "High (>$80K)"
+    )
+  )
+
+# Scatter plot
+ggplot(county_income_plot) +
+  aes(
+    x = total_popE,
+    y = median_ageE,
+    color = income_cat,
+    size = median_incomeM
+  ) +
+  geom_point(alpha = 0.7) +
+  scale_color_brewer(palette = "Set2", name = "Income Category") +
+  scale_size_continuous(name = "Income MOE") +
+  labs(
+    title = "Population vs Median Age by Income Category",
+    x = "Total Population",
+    y = "Median Age"
+  ) +
+  facet_wrap(~ income_cat) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+  scale_x_continuous(labels = scales::comma)
+```
 
 ------------------------------------------------------------------------
 
