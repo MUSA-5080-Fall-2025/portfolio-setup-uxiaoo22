@@ -148,7 +148,7 @@ head(education_vars, 5)
 ```{r}
 # Open the full variable list in RStudio viewer
 # This opens a searchable data table
-View(acs_vars_2022)
+if (interactive()) View(acs_vars_2022)
 
 # Pro tip: You can also search specific table groups
 # B01 = Age and Sex
@@ -483,10 +483,7 @@ county_reliability <- county_data %>%
   )
 
 # MOE by population size
-ggplot(
-  county_data %>%
-    mutate(income_moe_pct = (median_incomeM / median_incomeE) * 100)
-) +
+ggplot(county_reliability) +
   aes(x = total_popE, y = income_moe_pct) +
   geom_point(alpha = 0.7) +
   geom_hline(yintercept = 10, color = "red", linetype = "dashed") +
@@ -854,7 +851,10 @@ p3 <- ggplot(full_data) +
   theme(legend.position = "none")
 
 # Plot 4: Data reliability by population
-p4 <- ggplot(county_reliability) +
+p4 <- ggplot(
+  county_data %>%
+    mutate(income_moe_pct = (median_incomeM / median_incomeE) * 100)
+) +
   aes(x = total_popE, y = income_moe_pct) +
   geom_point(alpha = 0.7) +
   geom_hline(yintercept = 10, color = "red", linetype = "dashed") +
@@ -862,6 +862,7 @@ p4 <- ggplot(county_reliability) +
        x = "Population", y = "MOE (%)") +
   scale_x_continuous(labels = comma) +
   theme_minimal()
+
 
 # Combine all plots
 combined_plot <- (p1 | p2) / (p3 | p4)
