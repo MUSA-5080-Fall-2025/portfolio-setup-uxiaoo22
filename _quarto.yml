@@ -20,6 +20,9 @@ website:
         menu:
           - href: labs/lab_0/script
             text: "Lab 0: dplyr Basics"
+          - href: labs/lab_1/week-03/script/week3_lab_exercise.qmd
+            text: "Lab 1"
+            
       - text: "Assignments"
         menu:
           - href: Assignments/Assignment_1.qmd
