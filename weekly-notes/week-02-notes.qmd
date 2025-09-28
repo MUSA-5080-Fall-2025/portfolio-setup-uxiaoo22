@@ -1,6 +1,6 @@
 ---
 title: "Week 2 Notes"
-date: "2025-09-08"
+date: "2025-09-15"
 ---
 
 ## Key Concepts Learned
