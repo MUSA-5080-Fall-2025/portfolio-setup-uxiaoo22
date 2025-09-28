@@ -785,7 +785,6 @@ full_data <- full_data %>%
       TRUE ~ "High Income"
     )
   )
-
 head(full_data)
 ```
 
