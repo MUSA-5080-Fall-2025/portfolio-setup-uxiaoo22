@@ -148,7 +148,7 @@ head(education_vars, 5)
 ```{r}
 # Open the full variable list in RStudio viewer
 # This opens a searchable data table
-if (interactive()) View(acs_vars_2022)
+View(acs_vars_2022)
 
 # Pro tip: You can also search specific table groups
 # B01 = Age and Sex
@@ -483,7 +483,10 @@ county_reliability <- county_data %>%
   )
 
 # MOE by population size
-ggplot(county_reliability) +
+ggplot(
+  county_data %>%
+    mutate(income_moe_pct = (median_incomeM / median_incomeE) * 100)
+) +
   aes(x = total_popE, y = income_moe_pct) +
   geom_point(alpha = 0.7) +
   geom_hline(yintercept = 10, color = "red", linetype = "dashed") +
@@ -494,7 +497,9 @@ ggplot(county_reliability) +
     caption = "Red line = 10% reliability threshold"
   ) +
   theme_minimal() +
-  scale_x_continuous(labels = comma)
+  scale_x_continuous(labels = scales::comma)
+
+
 ```
 
 ### 3.2 Compare Reliability by County Size
