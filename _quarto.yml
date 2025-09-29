@@ -27,7 +27,7 @@ website:
             
       - text: "Assignments"
         menu:
-          - href: Assignments/Assignment1/Assignment_1.qmd
+          - href: Assignments/Assignment_1/Assignment_1.qmd
             text: "Assignment 1: Census Data Exploration"
    
             
