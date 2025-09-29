@@ -2728,9 +2728,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="questions-for-further-investigation" class="level2">
 <h2 class="anchored" data-anchor-id="questions-for-further-investigation">Questions for Further Investigation</h2>
 <ol type="1">
-<li><p>Are high-MOE counties geographically clustered (e.g., along the border or in rural west Texas), and does this spatial pattern affect equity?</p></li>
-<li><p>How do data quality issues change over time — are counties improving or declining in reliability across ACS cycles?</p></li>
-<li><p>Do certain demographic groups (Hispanic, Black, rural populations) consistently face higher MOEs, and what targeted outreach could improve data collection?</p></li>
+<li>Are high-MOE counties geographically clustered (e.g., along the border or in rural west Texas), and does this spatial pattern affect equity?</li>
+<li>How do data quality issues change over time — are counties improving or declining in reliability across ACS cycles?</li>
+<li>Do certain demographic groups (Hispanic, Black, rural populations) consistently face higher MOEs, and what targeted outreach could improve data collection?</li>
 </ol>
 </section>
 </section>
@@ -2743,14 +2743,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p><strong>Reproducibility:</strong></p>
 <ul>
-<li><p>All analysis conducted in R version 2025.05.1+513 (2025.05.1+513)</p></li>
-<li><p>Census API key required for replication</p></li>
-<li><p>Complete code and documentation available at: https://musa-5080-fall-2025.github.io/portfolio-setup-uxiaoo22/</p></li>
+<li>All analysis conducted in R version 2025.05.1+513 (2025.05.1+513)</li>
+<li>Census API key required for replication</li>
+<li>Complete code and documentation available at: https://musa-5080-fall-2025.github.io/portfolio-setup-uxiaoo22/</li>
 </ul>
 <p><strong>Methodology Notes:</strong></p>
-<p>Focused on Texas counties using ACS 2022 5-year data. Variables selected: median household income, total population, and race/ethnicity (tract level). Cleaned county names by removing state suffixes for readability. Categorized margins of error (MOE) into High, Moderate, Low confidence levels for analysis clarity. Selected counties (Culberson and Dimmit) for tract-level study to highlight data reliability challenges</p>
+<ul>
+<li>Focused on Texas counties using ACS 2022 5-year data. Variables selected: median household income, total population, and race/ethnicity (tract level).</li>
+<li>Cleaned county names by removing state suffixes for readability.</li>
+<li>Categorized margins of error (MOE) into High, Moderate, Low confidence levels for analysis clarity.</li>
+<li>Selected counties (Culberson and Dimmit) for tract-level study to highlight data reliability challenges</li>
+</ul>
 <p><strong>Limitations:</strong></p>
-<p>ACS data for small, rural counties often carries large MOEs, limiting reliability. Analysis restricted to Texas counties; findings may not generalize to other states. Reliance on 5-year estimates improves stability but masks short-term trends. MOE thresholds (&lt;5%, 5–10%, &gt;10%) are heuristic and may oversimplify nuanced reliability issues</p>
+<ul>
+<li>ACS data for small, rural counties often carries large MOEs, limiting reliability.</li>
+<li>Analysis restricted to Texas counties; findings may not generalize to other states.</li>
+<li>Reliance on 5-year estimates improves stability but masks short-term trends.</li>
+<li>MOE thresholds (&lt;5%, 5–10%, &gt;10%) are heuristic and may oversimplify nuanced reliability issues</li>
+</ul>
 <hr>
 <section id="submission-checklist" class="level2">
 <h2 class="anchored" data-anchor-id="submission-checklist">Submission Checklist</h2>
