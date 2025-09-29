@@ -2736,10 +2736,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="technical-notes" class="level1">
 <h1>Technical Notes</h1>
-<p><strong>Data Sources:</strong> - U.S. Census Bureau, American Community Survey 2018-2022 5-Year Estimates - Retrieved via tidycensus R package on 09/29/2025</p>
-<p><strong>Reproducibility:</strong> - All analysis conducted in R version 2025.05.1+513 (2025.05.1+513) - Census API key required for replication - Complete code and documentation available at: https://musa-5080-fall-2025.github.io/portfolio-setup-uxiaoo22/</p>
-<p><strong>Methodology Notes:</strong> - Focused on Texas counties using ACS 2022 5-year data - Variables selected: median household income, total population, and race/ethnicity (tract level) - Cleaned county names by removing state suffixes for readability - Categorized margins of error (MOE) into High, Moderate, Low confidence levels for analysis clarity - Selected counties (Culberson and Dimmit) for tract-level study to highlight data reliability challenges</p>
-<p><strong>Limitations:</strong> - ACS data for small, rural counties often carries large MOEs, limiting reliability - Analysis restricted to Texas counties; findings may not generalize to other states - Reliance on 5-year estimates improves stability but masks short-term trends - MOE thresholds (&lt;5%, 5–10%, &gt;10%) are heuristic and may oversimplify nuanced reliability issues</p>
+<p><strong>Data Sources:</strong></p>
+<ul>
+<li>U.S. Census Bureau, American Community Survey 2018-2022 5-Year Estimates</li>
+<li>Retrieved via tidycensus R package on 09/29/2025</li>
+</ul>
+<p><strong>Reproducibility:</strong></p>
+<ul>
+<li><p>All analysis conducted in R version 2025.05.1+513 (2025.05.1+513)</p></li>
+<li><p>Census API key required for replication</p></li>
+<li><p>Complete code and documentation available at: https://musa-5080-fall-2025.github.io/portfolio-setup-uxiaoo22/</p></li>
+</ul>
+<p><strong>Methodology Notes:</strong></p>
+<p>Focused on Texas counties using ACS 2022 5-year data. Variables selected: median household income, total population, and race/ethnicity (tract level). Cleaned county names by removing state suffixes for readability. Categorized margins of error (MOE) into High, Moderate, Low confidence levels for analysis clarity. Selected counties (Culberson and Dimmit) for tract-level study to highlight data reliability challenges</p>
+<p><strong>Limitations:</strong></p>
+<p>ACS data for small, rural counties often carries large MOEs, limiting reliability. Analysis restricted to Texas counties; findings may not generalize to other states. Reliance on 5-year estimates improves stability but masks short-term trends. MOE thresholds (&lt;5%, 5–10%, &gt;10%) are heuristic and may oversimplify nuanced reliability issues</p>
 <hr>
 <section id="submission-checklist" class="level2">
 <h2 class="anchored" data-anchor-id="submission-checklist">Submission Checklist</h2>

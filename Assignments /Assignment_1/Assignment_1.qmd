@@ -505,26 +505,25 @@ kable(
 # Technical Notes
 
 **Data Sources:** 
+
 - U.S. Census Bureau, American Community Survey 2018-2022 5-Year Estimates
 - Retrieved via tidycensus R package on 09/29/2025
 
 **Reproducibility:** 
+
 - All analysis conducted in R version 2025.05.1+513 (2025.05.1+513)
+
 - Census API key required for replication
+
 - Complete code and documentation available at: https://musa-5080-fall-2025.github.io/portfolio-setup-uxiaoo22/
 
 **Methodology Notes:**
-- Focused on Texas counties using ACS 2022 5-year data
-- Variables selected: median household income, total population, and race/ethnicity (tract level)
-- Cleaned county names by removing state suffixes for readability
-- Categorized margins of error (MOE) into High, Moderate, Low confidence levels for analysis clarity
-- Selected counties (Culberson and Dimmit) for tract-level study to highlight data reliability challenges
+
+Focused on Texas counties using ACS 2022 5-year data. Variables selected: median household income, total population, and race/ethnicity (tract level). Cleaned county names by removing state suffixes for readability. Categorized margins of error (MOE) into High, Moderate, Low confidence levels for analysis clarity. Selected counties (Culberson and Dimmit) for tract-level study to highlight data reliability challenges
 
 **Limitations:**
-- ACS data for small, rural counties often carries large MOEs, limiting reliability
-- Analysis restricted to Texas counties; findings may not generalize to other states
-- Reliance on 5-year estimates improves stability but masks short-term trends
-- MOE thresholds (<5%, 5–10%, >10%) are heuristic and may oversimplify nuanced reliability issues
+
+ACS data for small, rural counties often carries large MOEs, limiting reliability. Analysis restricted to Texas counties; findings may not generalize to other states. Reliance on 5-year estimates improves stability but masks short-term trends. MOE thresholds (<5%, 5–10%, >10%) are heuristic and may oversimplify nuanced reliability issues
 
 ---
 
