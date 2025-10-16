@@ -34,6 +34,8 @@ website:
         menu:
           - href: Assignments/Assignment_1/Assignment_1.qmd
             text: "Assignment 1: Census Data Exploration"
+          - href: Assignments/Assignment_2/Yu_Xiao_Assignment_2.qmd
+            text: "Assignment 2
    
             
 format:
